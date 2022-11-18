@@ -6,4 +6,4 @@ Learning Playwright for Java | Anh Tester
 
 Project nghiên cứu Playwright với ngôn ngữ lập trình Java cùng TestNG Framework theo mô hình code Page Object Model.
 
-⭐ Run Parallel Execution
+⭐ Parallel Execution
