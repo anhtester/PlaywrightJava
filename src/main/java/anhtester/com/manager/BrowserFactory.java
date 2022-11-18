@@ -11,9 +11,9 @@ public class BrowserFactory {
     protected static BrowserContext browserContext;
     protected static Page page;
 
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    int screenWidth = (int) screenSize.getWidth();
-    int screenHeight = (int) screenSize.getHeight();
+    private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    private static int screenWidth = (int) screenSize.getWidth();
+    private static int screenHeight = (int) screenSize.getHeight();
 
     //https://playwright.dev/java/docs/browsers
 
@@ -49,10 +49,11 @@ public class BrowserFactory {
         }
 
         PageManager.setBrowser(browser);
-        browserContext = PageManager.getBrowser().newContext();
+        browserContext = PageManager.getBrowser().newContext(new Browser.NewContextOptions().setViewportSize(screenWidth, screenHeight));
         PageManager.setBrowserContext(browserContext);
         page = PageManager.getBrowserContext().newPage();
         PageManager.setPage(page);
+        page.waitForTimeout(2000);
         ActionKeyword.maximizeBrowserOnWindow();
 
         return PageManager.getPage();

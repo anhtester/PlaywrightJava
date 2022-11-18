@@ -1,5 +1,6 @@
 package anhtester.com.learning;
 
+import anhtester.com.keyword.ActionKeyword;
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
@@ -16,7 +17,7 @@ public class LearnTestGenerator {
         Playwright playwright = Playwright.create();
         Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
         Page page = browser.newPage();
-
+        ActionKeyword.maximizeBrowserOnWindow();
         page.navigate("https://anhtester.com");
         System.out.println(page.title());
         System.out.println(page.url());
