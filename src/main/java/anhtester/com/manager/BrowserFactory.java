@@ -53,7 +53,6 @@ public class BrowserFactory {
         PageManager.setBrowserContext(browserContext);
         page = PageManager.getBrowserContext().newPage();
         PageManager.setPage(page);
-        page.waitForTimeout(2000);
         ActionKeyword.maximizeBrowserOnWindow();
 
         return PageManager.getPage();
