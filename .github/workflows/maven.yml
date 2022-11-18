@@ -34,8 +34,6 @@ jobs:
         with:
           node-version: 14
       - run: npx playwright install --with-deps ${{ matrix.browser }} chromium
-      - run: npm run test -- --project=${{ matrix.browser }}
-        shell: bash
       - uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.browser }}-win-test-results
