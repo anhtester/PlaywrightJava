@@ -40,8 +40,6 @@ jobs:
           path: test-results
       - name: Build & Install
         run: mvn -B install -D skipTests --no-transfer-progress
-      - name: Install Playwright
-        run: mvn exec:java -e -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install --with-deps"
       - name: Run Tests with Maven
         run: mvn clean test --file pom.xml
 
