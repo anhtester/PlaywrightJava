@@ -33,13 +33,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 14
-      - run: npm i -g npm@8
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: npm-${{ hashFiles('package-lock.json') }}
-          restore-keys: npm-
+      - run: npm i -g npm@5
       - run: npm ci
       - run: npm run build
       - run: npx playwright install --with-deps ${{ matrix.browser }} chromium
