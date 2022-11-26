@@ -14,17 +14,14 @@ public class BaseTest {
 
     @BeforeMethod
     @Parameters({"browser"})
-    public void createBrowser(@Optional("chromium") String browserName) {
+    public void createBrowser(@Optional("chrome") String browserName) {
         BrowserFactory.createBrowser(browserName);
     }
 
     @AfterMethod
     public void closePage() {
         PageManager.closePage();
-    }
-
-    @AfterSuite
-    public void closeBrowser() {
         PageManager.closeBrowser();
     }
+
 }

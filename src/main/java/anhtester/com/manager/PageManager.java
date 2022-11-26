@@ -47,15 +47,19 @@ public class PageManager {
 
     public static void closePage() {
         if (pageThreadLocal.get() != null) {
+            pageThreadLocal.get().close();
             pageThreadLocal.remove();
         }
     }
 
     public static void closeBrowser() {
         if (browserThreadLocal.get() != null) {
+            browserThreadLocal.get().close();
             browserThreadLocal.remove();
+            System.out.println("Closed browser.");
         }
         if (playwrightThreadLocal.get() != null) {
+            playwrightThreadLocal.get().close();
             playwrightThreadLocal.remove();
         }
     }

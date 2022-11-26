@@ -13,6 +13,7 @@ public class CommonPage {
     }
 
     public CategoryPage openCategoryPage(){
+        page.waitForLoadState();
         page.click(menuProducts);
         page.click(menuCategory);
         return new CategoryPage(page);
