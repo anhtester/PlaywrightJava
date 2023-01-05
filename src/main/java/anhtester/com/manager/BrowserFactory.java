@@ -54,7 +54,7 @@ public class BrowserFactory {
         System.out.println("Screen Browser Height: " + screenHeight);
 
         PageManager.setBrowser(browser);
-        browserContext = PageManager.getBrowser().newContext(new Browser.NewContextOptions().setViewportSize(screenWidth - ((screenWidth * 2) / 100), screenHeight - ((screenHeight * 10) / 100)));
+        browserContext = PageManager.getBrowser().newContext(new Browser.NewContextOptions().setViewportSize(screenWidth - ((screenWidth * 2) / 100), screenHeight));
 
         PageManager.setBrowserContext(browserContext);
         page = PageManager.getBrowserContext().newPage();
