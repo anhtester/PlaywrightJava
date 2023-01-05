@@ -28,7 +28,8 @@ public class LoginPage {
     }
 
     public void loginAdminCMS(String email, String password){
-        page.navigate(URL_ADMIN, new Page.NavigateOptions().setWaitUntil(WaitUntilState.NETWORKIDLE));
+        page.navigate(URL_ADMIN);
+        page.waitForLoadState();
         Assert.assertEquals(page.locator(headerLoginPageAdmin).textContent(), "Welcome to Anh Tester Demo");
         assertThat(page.locator(headerLoginPageAdmin)).hasText("Welcome to Anh Tester Demo");
         page.fill(inputEmail, email);
@@ -39,7 +40,8 @@ public class LoginPage {
     }
 
     public void loginUserCMS(String email, String password){
-        page.navigate(URL_USER, new Page.NavigateOptions().setWaitUntil(WaitUntilState.NETWORKIDLE));
+        page.navigate(URL_USER);
+        page.waitForLoadState();
         page.click(buttonX);
         assertThat(page.locator(headerLoginPageUser)).hasText("Login to your account.");
         page.fill(inputEmail, email);
