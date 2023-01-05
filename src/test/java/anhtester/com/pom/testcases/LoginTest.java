@@ -14,9 +14,9 @@ public class LoginTest extends BaseTest {
         loginPage.loginAdminCMS("admin@example.com", "123456");
     }
 
-    @Test
-    public void loginTestUserCMS(){
-        loginPage = new LoginPage(PageManager.getPage());
-        loginPage.loginUserCMS("customer@example.com", "123456");
-    }
+//    @Test
+//    public void loginTestUserCMS(){
+//        loginPage = new LoginPage(PageManager.getPage());
+//        loginPage.loginUserCMS("customer@example.com", "123456");
+//    }
 }

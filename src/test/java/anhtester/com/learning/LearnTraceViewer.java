@@ -1,8 +1,5 @@
 package anhtester.com.learning;
 
-import anhtester.com.common.BaseTest;
-import anhtester.com.constant.ConstantApp;
-import anhtester.com.manager.PageManager;
 import com.microsoft.playwright.*;
 import org.testng.annotations.Test;
 
@@ -22,10 +19,10 @@ public class LearnTraceViewer {
                 .setSources(true));
 
         Page page = browserContext.newPage();
-        page.navigate(ConstantApp.URL);
-        page.locator("//input[@id='iusername']").fill(ConstantApp.USERNAME);
-        page.locator("//input[@id='ipassword']").fill(ConstantApp.PASSWORD);
-        page.locator("//button[@type='submit']").click();
+        page.navigate("https://crm.anhtester.com/admin/authentication");
+        page.locator("//input[@id='email']").fill("admin@example.com");
+        page.locator("//input[@id='password']").fill("123456");
+        page.locator("//button[normalize-space()='Login']").click();
 
         // Stop tracing and export it into a zip archive.
         browserContext.tracing().stop(new Tracing.StopOptions()

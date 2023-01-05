@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="SuiteLoginTest">
-    <test name="LoginTest" preserve-order="true" thread-count="4" parallel="methods">
-        <parameter name="browser" value="chrome"></parameter>
+    <test name="LoginTest" thread-count="4" parallel="methods">
+        <parameter name="browser" value="chrome"/>
         <classes>
             <class name="anhtester.com.pom.testcases.LoginTest"/>
         </classes>

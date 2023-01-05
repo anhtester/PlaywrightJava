@@ -10,8 +10,8 @@ public class ActionKeyword {
             rb = new Robot();
             rb.keyPress(KeyEvent.VK_WINDOWS);
             rb.keyPress(KeyEvent.VK_UP);
-            rb.keyRelease(KeyEvent.VK_WINDOWS);
             rb.keyRelease(KeyEvent.VK_UP);
+            rb.keyRelease(KeyEvent.VK_WINDOWS);
         } catch (AWTException e) {
             e.printStackTrace();
         }

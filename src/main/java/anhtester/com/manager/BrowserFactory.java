@@ -1,9 +1,11 @@
 package anhtester.com.manager;
 
+import anhtester.com.constant.AppConfig;
 import anhtester.com.keyword.ActionKeyword;
 import com.microsoft.playwright.*;
 
 import java.awt.*;
+import java.util.Arrays;
 
 public class BrowserFactory {
     protected static Playwright playwright;
@@ -24,37 +26,41 @@ public class BrowserFactory {
         switch (browserName.toLowerCase().trim()) {
             case "chromium":
                 System.out.println("Create Chromium browser...");
-                browser = (PageManager.getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false)));
+                browser = (PageManager.getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setHeadless(AppConfig.HEADLESS)));
                 break;
             case "chrome":
                 System.out.println("Create Chrome browser...");
-                browser = (PageManager.getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(false)));
+                browser = (PageManager.getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(AppConfig.HEADLESS)));
                 break;
             case "edge":
                 System.out.println("Create Edge browser...");
-                browser = (PageManager.getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setChannel("msedge").setHeadless(false)));
+                browser = (PageManager.getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setChannel("msedge").setHeadless(AppConfig.HEADLESS)));
                 break;
             case "firefox":
                 System.out.println("Create Firefox browser...");
-                browser = (PageManager.getPlaywright().firefox().launch(new BrowserType.LaunchOptions().setHeadless(false)));
+                browser = (PageManager.getPlaywright().firefox().launch(new BrowserType.LaunchOptions().setHeadless(AppConfig.HEADLESS)));
                 break;
             case "safari":
                 System.out.println("Create Safari browser...");
-                browser = (PageManager.getPlaywright().webkit().launch(new BrowserType.LaunchOptions().setHeadless(false)));
+                browser = (PageManager.getPlaywright().webkit().launch(new BrowserType.LaunchOptions().setHeadless(AppConfig.HEADLESS)));
                 break;
             default:
                 System.out.println("Set default Chromium browser...");
-                browser = (PageManager.getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false)));
+                browser = (PageManager.getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setHeadless(AppConfig.HEADLESS)));
                 break;
         }
 
+        System.out.println("Screen Browser Width: " + screenWidth);
+        System.out.println("Screen Browser Height: " + screenHeight);
+
         PageManager.setBrowser(browser);
-        browserContext = PageManager.getBrowser().newContext(new Browser.NewContextOptions().setViewportSize(screenWidth, screenHeight));
-        //browserContext = PageManager.getBrowser().newContext();
+        browserContext = PageManager.getBrowser().newContext(new Browser.NewContextOptions().setViewportSize(screenWidth, screenHeight).setScreenSize(screenWidth, screenHeight));
+
         PageManager.setBrowserContext(browserContext);
         page = PageManager.getBrowserContext().newPage();
+
         PageManager.setPage(page);
-        //ActionKeyword.maximizeBrowserOnWindow();
+        ActionKeyword.maximizeBrowserOnWindow();
         return PageManager.getPage();
     }
 }
