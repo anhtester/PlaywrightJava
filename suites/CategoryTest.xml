@@ -1,9 +1,9 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="SuiteLoginTest">
-    <test name="LoginTest" thread-count="4" parallel="methods">
+    <test name="LoginTest" parallel="methods">
         <parameter name="browser" value="chromium"/>
         <classes>
-            <class name="anhtester.com.pom.testcases.CategoryTest"/>
+            <class name="com.anhtester.pom.testcases.CategoryTest"/>
         </classes>
     </test>
 </suite>
