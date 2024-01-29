@@ -35,9 +35,9 @@ public class ExtentTestManager {
         ScreenshotOptions screenshotOptions = new ScreenshotOptions();
 
         String base64Image = "data:image/png;base64,"
-                + PageManager.getPage().screenshot(screenshotOptions.setPath(Paths.get(SystemHelper.getCurrentDir() + PropertiesHelper.getValue("SCREENSHOT_PATH") + File.separator + dateFormat.format(new Date()) + ".png")));
+                + PageManager.getPage().screenshot(screenshotOptions.setPath(Paths.get(SystemHelper.getCurrentDir() + PropertiesHelper.getValue("SCREENSHOT_PATH") + File.separator + "ExtentReport_" + dateFormat.format(new Date()) + ".png"))).toString();
 
-        getTest().log(Status.INFO, message,
+        getTest().log(Status.FAIL, message,
                 MediaEntityBuilder.createScreenCaptureFromBase64String(base64Image).build());
     }
 

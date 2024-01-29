@@ -29,7 +29,6 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onFinish(ITestContext result) {
-        //Kết thúc và thực thi Extents Report
         ExtentReportManager.getExtentReports().flush();
     }
 
@@ -41,7 +40,6 @@ public class TestListener implements ITestListener {
             CaptureHelper.startRecord(result.getName());
         }
 
-        //Bắt đầu ghi 1 TCs mới vào Extent Report
         ExtentTestManager.saveToReport(getTestName(result), getTestDescription(result));
     }
 
@@ -58,7 +56,6 @@ public class TestListener implements ITestListener {
             CaptureHelper.stopRecord();
         }
 
-        //Extent Report
         ExtentTestManager.logMessage(Status.PASS, result.getName() + " is passed.");
     }
 
@@ -82,7 +79,7 @@ public class TestListener implements ITestListener {
 
         //Allure Report
         //AllureManager.saveTextLog(result.getName() + " is failed.");
-        AllureManager.saveScreenshotPNG();
+        //AllureManager.saveScreenshotPNG();
     }
 
     @Override

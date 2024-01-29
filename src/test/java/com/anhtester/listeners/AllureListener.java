@@ -51,7 +51,6 @@ public class AllureListener implements TestLifecycleListener {
             if (PageManager.getPage() != null) {
                 Allure.addAttachment(result.getName() + "_Failed_Screenshot", new ByteArrayInputStream(PageManager.getPage().screenshot(screenshotOptions.setPath(Paths.get(SystemHelper.getCurrentDir() + PropertiesHelper.getValue("SCREENSHOT_PATH") + File.separator + dateFormat.format(new Date()) + ".png")))));
             }
-            AllureManager.addAttachmentVideoAVI();
         }
     }
 

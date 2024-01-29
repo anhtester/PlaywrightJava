@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="SuiteLoginTest">
-    <test name="LoginTest" parallel="methods">
+<suite name="Regression Test">
+    <test name="Login Test" parallel="methods">
         <parameter name="browser" value="chrome"/>
         <classes>
             <class name="com.anhtester.pom.testcases.LoginTest"/>
