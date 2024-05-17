@@ -11,6 +11,6 @@ buildNumber.properties
 .mvn/wrapper/maven-wrapper.jar
 *.zip
 .idea/
-reports/
+report/
 logs/
 *.iml

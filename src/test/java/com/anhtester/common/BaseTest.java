@@ -9,7 +9,7 @@ import org.testng.annotations.*;
 public class BaseTest {
 
     @BeforeMethod
-    @Parameters({"browser"})
+    @Parameters({"BROWSER"})
     public void createBrowser(@Optional("chrome") String browserName) {
         BrowserFactory.createBrowser(browserName);
     }
