@@ -1,6 +1,7 @@
 package com.anhtester.managers;
 
 import com.anhtester.constants.AppConfig;
+import com.anhtester.keywords.WebKeyword;
 import com.microsoft.playwright.*;
 
 import java.awt.*;
@@ -10,14 +11,9 @@ public class BrowserFactory {
     protected static Browser browser;
     protected static BrowserContext browserContext;
     protected static Page page;
-
-    private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    private static int screenWidth = ((int) screenSize.getWidth());
-    private static int screenHeight = ((int) screenSize.getHeight());
-
     //https://playwright.dev/java/docs/browsers
 
-    public static Page createBrowser(String browserName) {
+    public static void createBrowser(String browserName) {
         playwright = Playwright.create();
         PageManager.setPlaywright(playwright);
 
@@ -48,21 +44,17 @@ public class BrowserFactory {
                 break;
         }
 
-        System.out.println("Screen Browser Width: " + screenWidth);
-        System.out.println("Screen Browser Height: " + screenHeight);
-
         PageManager.setBrowser(browser);
 
-        screenWidth = screenWidth - ((screenWidth * 5) / 100);
-        System.out.println("Screen Browser Width (customize): " + screenWidth);
+//        System.out.println("Screen Browser Width (customize): " + AppConfig.VIEWPORT_WIDTH);
+//        System.out.println("Screen Browser Height (customize): " + AppConfig.VIEWPORT_HEIGHT);
 
-        browserContext = PageManager.getBrowser().newContext(new Browser.NewContextOptions().setViewportSize(screenWidth, screenHeight).setScreenSize(screenWidth, screenHeight));
+        browserContext = PageManager.getBrowser().newContext(new Browser.NewContextOptions().setViewportSize(AppConfig.VIEWPORT_WIDTH, AppConfig.VIEWPORT_HEIGHT).setDeviceScaleFactor(1));
 
         PageManager.setBrowserContext(browserContext);
         page = PageManager.getBrowserContext().newPage();
 
         PageManager.setPage(page);
-        //WebKeyword.maximizeBrowserOnWindow();
-        return PageManager.getPage();
+        WebKeyword.maximizeBrowserOnWindow();
     }
 }

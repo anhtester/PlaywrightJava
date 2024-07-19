@@ -3,7 +3,7 @@
     <test name="Category Test" parallel="methods">
         <parameter name="browser" value="chromium"/>
         <classes>
-            <class name="com.anhtester.pom.testcases.CategoryTest"/>
+            <class name="com.anhtester.pom.testcases.admin.CategoryTest"/>
         </classes>
     </test>
 </suite>

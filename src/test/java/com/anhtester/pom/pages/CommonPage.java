@@ -1,21 +1,55 @@
 package com.anhtester.pom.pages;
 
-import com.microsoft.playwright.Page;
+import com.anhtester.keywords.WebKeyword;
+import com.anhtester.managers.PageManager;
+import com.anhtester.pom.pages.admin.CategoryPage;
+import com.anhtester.pom.pages.admin.DashboardPage;
+import com.anhtester.pom.pages.admin.LoginPage;
+import com.anhtester.pom.pages.user.LoginUserPage;
 
 public class CommonPage {
 
-    private String menuProducts = "//span[normalize-space()='Products']";
-    private String menuCategory = "//span[normalize-space()='Category']";
+    public String menuProducts = "//span[normalize-space()='Products']";
+    public String menuCategory = "//span[normalize-space()='Category']";
+    public String buttonClearCacheOnAdminPage = "//span[.='Clear Cache']";
 
-    private Page page;
-    public CommonPage(Page _page){
-        page = _page;
+    private LoginPage loginPage;
+    private DashboardPage dashboardPage;
+    private CategoryPage categoryPage;
+    private LoginUserPage loginUserPage;
+
+    public LoginPage getLoginPage() {
+        if (loginPage == null) {
+            loginPage = new LoginPage();
+        }
+        return loginPage;
     }
 
-    public CategoryPage openCategoryPage(){
-        page.waitForLoadState();
-        page.click(menuProducts);
-        page.click(menuCategory);
-        return new CategoryPage(page);
+    public DashboardPage getDashboardPage() {
+        if (dashboardPage == null) {
+            dashboardPage = new DashboardPage();
+        }
+        return dashboardPage;
+    }
+
+    public CategoryPage getCategoryPage() {
+        if (categoryPage == null) {
+            categoryPage = new CategoryPage();
+        }
+        return categoryPage;
+    }
+
+    public LoginUserPage getLoginUserPage() {
+        if (loginUserPage == null) {
+            loginUserPage = new LoginUserPage();
+        }
+        return loginUserPage;
+    }
+
+    public CategoryPage openCategoryPage() {
+        PageManager.getPage().waitForLoadState();
+        WebKeyword.click(menuProducts);
+        WebKeyword.click(menuCategory);
+        return new CategoryPage();
     }
 }

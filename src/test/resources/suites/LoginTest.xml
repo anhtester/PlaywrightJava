@@ -3,7 +3,7 @@
     <test name="Login Test" parallel="methods">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="com.anhtester.pom.testcases.LoginTest"/>
+            <class name="com.anhtester.pom.testcases.admin.LoginTest"/>
         </classes>
     </test>
 </suite>

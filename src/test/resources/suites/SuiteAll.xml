@@ -2,6 +2,7 @@
 <suite name="Regression Test">
     <suite-files>
         <suite-file path="LoginTest.xml"/>
+        <suite-file path="DashboardTest.xml"/>
         <suite-file path="CategoryTest.xml"/>
     </suite-files>
 </suite>
