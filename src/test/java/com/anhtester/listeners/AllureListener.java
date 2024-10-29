@@ -2,6 +2,7 @@ package com.anhtester.listeners;
 
 import com.anhtester.helpers.PropertiesHelper;
 import com.anhtester.helpers.SystemHelper;
+import com.anhtester.keywords.WebKeyword;
 import com.anhtester.managers.PageManager;
 import com.anhtester.reports.AllureManager;
 import com.microsoft.playwright.Page.ScreenshotOptions;
@@ -44,14 +45,15 @@ public class AllureListener implements TestLifecycleListener {
 
     @Override
     public void beforeTestStop(TestResult result) {
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH-mm-ss");
-//
-//        ScreenshotOptions screenshotOptions = new ScreenshotOptions();
-//        if (result.getStatus() == Status.FAILED || result.getStatus() == Status.SKIPPED || result.getStatus() == Status.BROKEN) {
-//            if (PageManager.getPage() != null) {
-//                Allure.addAttachment(result.getName() + "_Failed_Screenshot", new ByteArrayInputStream(PageManager.getPage().screenshot(screenshotOptions.setPath(Paths.get(SystemHelper.getCurrentDir() + PropertiesHelper.getValue("SCREENSHOT_PATH") + File.separator + dateFormat.format(new Date()) + ".png")))));
-//            }
-//        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH-mm-ss");
+
+        ScreenshotOptions screenshotOptions = new ScreenshotOptions();
+        if (result.getStatus() == Status.FAILED) {
+            if (PageManager.getPage() != null) {
+                WebKeyword.sleep(1);
+                Allure.addAttachment(result.getName() + "_Failed_Screenshot", new ByteArrayInputStream(PageManager.getPage().screenshot(screenshotOptions.setPath(Paths.get(SystemHelper.getCurrentDir() + PropertiesHelper.getValue("SCREENSHOT_PATH") + File.separator + dateFormat.format(new Date()) + ".png")))));
+            }
+        }
     }
 
     @Override

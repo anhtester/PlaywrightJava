@@ -4,10 +4,10 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 
 import com.anhtester.keywords.WebKeyword;
 import com.anhtester.managers.PageManager;
-import com.anhtester.pom.pages.CommonPage;
+import com.anhtester.pom.pages.BasePage;
 import org.testng.Assert;
 
-public class LoginPage extends CommonPage {
+public class LoginPage extends BasePage {
 
     private String URL_ADMIN = "https://cms.anhtester.com/login";
     private String headerLoginPageAdmin = "//div[@class='card-body']//h1";

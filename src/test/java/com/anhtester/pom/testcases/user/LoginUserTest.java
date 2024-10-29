@@ -19,6 +19,6 @@ public class LoginUserTest extends BaseTest {
     public void testLoginFailWithEmailInvalid() {
         loginUserPage = new LoginUserPage();
         loginUserPage.loginUserCMS("customer123@example.com", "123456")
-                .verifyLoginFail("Invalid login credentials");
+                .verifyLoginFail("Invalid login credentials 123");
     }
 }

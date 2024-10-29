@@ -7,11 +7,12 @@ import com.anhtester.pom.pages.admin.DashboardPage;
 import com.anhtester.pom.pages.admin.LoginPage;
 import com.anhtester.pom.pages.user.LoginUserPage;
 
-public class CommonPage {
+public class BasePage {
 
     public String menuProducts = "//span[normalize-space()='Products']";
     public String menuCategory = "//span[normalize-space()='Category']";
     public String buttonClearCacheOnAdminPage = "//span[.='Clear Cache']";
+    public String buttonAcceptCookie = "//button[contains(@class, 'aiz-cookie-accept')]";
 
     private LoginPage loginPage;
     private DashboardPage dashboardPage;

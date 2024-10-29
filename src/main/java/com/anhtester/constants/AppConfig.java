@@ -12,4 +12,6 @@ public class AppConfig {
     public static boolean SCREENSHOT_FAIL = Boolean.parseBoolean(PropertiesHelper.getValue("SCREENSHOT_FAIL"));
     public static boolean SCREENSHOT_PASS = Boolean.parseBoolean(PropertiesHelper.getValue("SCREENSHOT_PASS"));
     public static int TIMEOUT_STEP = Integer.parseInt(PropertiesHelper.getValue("TIMEOUT_STEP"));
+    public static boolean TRACE_VIEWER = Boolean.parseBoolean(PropertiesHelper.getValue("TRACE_VIEWER"));
+
 }

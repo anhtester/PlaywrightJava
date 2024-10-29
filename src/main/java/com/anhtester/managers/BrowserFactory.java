@@ -5,6 +5,7 @@ import com.anhtester.keywords.WebKeyword;
 import com.microsoft.playwright.*;
 
 import java.awt.*;
+import java.nio.file.Paths;
 
 public class BrowserFactory {
     protected static Playwright playwright;
@@ -49,12 +50,23 @@ public class BrowserFactory {
 //        System.out.println("Screen Browser Width (customize): " + AppConfig.VIEWPORT_WIDTH);
 //        System.out.println("Screen Browser Height (customize): " + AppConfig.VIEWPORT_HEIGHT);
 
-        browserContext = PageManager.getBrowser().newContext(new Browser.NewContextOptions().setViewportSize(AppConfig.VIEWPORT_WIDTH, AppConfig.VIEWPORT_HEIGHT).setDeviceScaleFactor(1));
+        browserContext = PageManager.getBrowser().newContext(new Browser.NewContextOptions()
+                .setRecordVideoDir(Paths.get("exports/videos/"))
+                .setViewportSize(AppConfig.VIEWPORT_WIDTH, AppConfig.VIEWPORT_HEIGHT)
+                .setDeviceScaleFactor(1));
+
+        // Start tracing before creating / navigating a page.
+        if (AppConfig.TRACE_VIEWER == true) {
+            browserContext.tracing().start(new Tracing.StartOptions()
+                    .setScreenshots(true)
+                    .setSnapshots(true)
+                    .setSources(true));
+        }
 
         PageManager.setBrowserContext(browserContext);
         page = PageManager.getBrowserContext().newPage();
 
         PageManager.setPage(page);
-        WebKeyword.maximizeBrowserOnWindow();
+        //WebKeyword.maximizeBrowserOnWindow();
     }
 }

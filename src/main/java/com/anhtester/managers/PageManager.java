@@ -1,9 +1,9 @@
 package com.anhtester.managers;
 
-import com.microsoft.playwright.Browser;
-import com.microsoft.playwright.BrowserContext;
-import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Playwright;
+import com.anhtester.utils.LogUtils;
+import com.microsoft.playwright.*;
+
+import java.nio.file.Paths;
 
 public class PageManager {
 
@@ -48,18 +48,22 @@ public class PageManager {
         if (pageThreadLocal.get() != null) {
             pageThreadLocal.get().close();
             pageThreadLocal.remove();
+            LogUtils.info("Closed page.");
         }
+    }
+
+    public static void closeTracing(String path) {
+        // Stop tracing and export it into a zip archive.
+        browserContextThreadLocal.get().tracing().stop(new Tracing.StopOptions()
+                .setPath(Paths.get(path)));
+        LogUtils.info("Closed Tracing.");
     }
 
     public static void closeBrowser() {
         if (browserThreadLocal.get() != null) {
             browserThreadLocal.get().close();
             browserThreadLocal.remove();
-            System.out.println("Closed browser.");
-        }
-        if (playwrightThreadLocal.get() != null) {
-            playwrightThreadLocal.get().close();
-            playwrightThreadLocal.remove();
+            LogUtils.info("Closed browser.");
         }
     }
 

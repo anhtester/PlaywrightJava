@@ -2,11 +2,11 @@ package com.anhtester.pom.pages.admin;
 
 import com.anhtester.keywords.WebKeyword;
 import com.anhtester.managers.PageManager;
-import com.anhtester.pom.pages.CommonPage;
-import com.microsoft.playwright.Page;
+import com.anhtester.pom.pages.BasePage;
+
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
-public class CategoryPage extends CommonPage {
+public class CategoryPage extends BasePage {
 
     private String buttonAddNewCategory = "//span[normalize-space()='Add New category']";
     private String inputCategoryName = "//input[@id='name']";

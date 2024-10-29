@@ -1,5 +1,6 @@
 package com.anhtester.listeners;
 
+import com.anhtester.constants.AppConfig;
 import com.anhtester.helpers.CaptureHelper;
 import com.anhtester.helpers.PropertiesHelper;
 import com.anhtester.helpers.SystemHelper;
@@ -46,7 +47,7 @@ public class TestListener implements ITestListener {
     public void onTestStart(ITestResult result) {
         LogUtils.info("➡\uFE0F " + result.getName());
 
-        if (PropertiesHelper.getValue("VIDEO_RECORD").equals("true")) {
+        if (AppConfig.VIDEO_RECORD == true) {
             CaptureHelper.startRecord(result.getName());
         }
 
@@ -55,13 +56,17 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        LogUtils.info("⭐\uFE0F " + result.getName() + " is successfully.");
+        LogUtils.info("✅ " + result.getName() + " is PASSED.");
 
-        if (PropertiesHelper.getValue("SCREENSHOT_PASS").equals("true")) {
+        if (AppConfig.TRACE_VIEWER == true) {
+            PageManager.closeTracing("exports/tracing/trace_" + result.getName() + "_" + SystemHelper.getDateTimeNowAndMakeSlug() + ".zip");
+        }
+
+        if (AppConfig.SCREENSHOT_PASS == true) {
             CaptureHelper.takeScreenshot(result.getName());
         }
 
-        if (PropertiesHelper.getValue("VIDEO_RECORD").equals("true")) {
+        if (AppConfig.VIDEO_RECORD == true) {
             WebKeyword.sleep(0.5);
             CaptureHelper.stopRecord();
         }
@@ -71,13 +76,17 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
-        LogUtils.error("❌ " + result.getName() + " is FAIL.");
+        LogUtils.error("❌ " + result.getName() + " is FAILED.");
 
-        if (PropertiesHelper.getValue("SCREENSHOT_FAIL").equals("true")) {
+        if (AppConfig.TRACE_VIEWER == true) {
+            PageManager.closeTracing("exports/tracing/trace_" + result.getName() + "_FAILED_" + SystemHelper.getDateTimeNowAndMakeSlug() + ".zip");
+        }
+
+        if (AppConfig.SCREENSHOT_FAIL == true) {
             CaptureHelper.takeScreenshot(result.getName());
         }
 
-        if (PropertiesHelper.getValue("VIDEO_RECORD").equals("true")) {
+        if (AppConfig.VIDEO_RECORD == true) {
             WebKeyword.sleep(0.5);
             CaptureHelper.stopRecord();
         }
@@ -91,13 +100,13 @@ public class TestListener implements ITestListener {
         //AllureManager.saveTextLog(result.getName() + " is failed.");
         //AllureManager.saveScreenshotPNG();
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH-mm-ss");
-        Page.ScreenshotOptions screenshotOptions = new Page.ScreenshotOptions();
-        if (result.getStatus() == 2 || result.getStatus() == 3) {
-            if (PageManager.getPage() != null) {
-                Allure.addAttachment(result.getName() + "_Failed_Screenshot", new ByteArrayInputStream(PageManager.getPage().screenshot(screenshotOptions.setPath(Paths.get(SystemHelper.getCurrentDir() + PropertiesHelper.getValue("SCREENSHOT_PATH") + File.separator + dateFormat.format(new Date()) + ".png")))));
-            }
-        }
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH-mm-ss");
+//        Page.ScreenshotOptions screenshotOptions = new Page.ScreenshotOptions();
+//        if (result.getStatus() == 2 || result.getStatus() == 3) {
+//            if (PageManager.getPage() != null) {
+//                Allure.addAttachment(result.getName() + "_Failed_Screenshot", new ByteArrayInputStream(PageManager.getPage().screenshot(screenshotOptions.setPath(Paths.get(SystemHelper.getCurrentDir() + PropertiesHelper.getValue("SCREENSHOT_PATH") + File.separator + dateFormat.format(new Date()) + ".png")))));
+//            }
+//        }
     }
 
     @Override

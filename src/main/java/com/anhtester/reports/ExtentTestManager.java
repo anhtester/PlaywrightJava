@@ -12,6 +12,7 @@ import com.microsoft.playwright.Page.ScreenshotOptions;
 import java.io.File;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,8 +35,7 @@ public class ExtentTestManager {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH-mm-ss");
         ScreenshotOptions screenshotOptions = new ScreenshotOptions();
 
-        String base64Image = "data:image/png;base64,"
-                + PageManager.getPage().screenshot(screenshotOptions.setPath(Paths.get(SystemHelper.getCurrentDir() + PropertiesHelper.getValue("SCREENSHOT_PATH") + File.separator + "ExtentReport_" + dateFormat.format(new Date()) + ".png"))).toString();
+        String base64Image = Base64.getEncoder().encodeToString(PageManager.getPage().screenshot(screenshotOptions.setPath(Paths.get(SystemHelper.getCurrentDir() + PropertiesHelper.getValue("SCREENSHOT_PATH") + File.separator + "ExtentReport_" + dateFormat.format(new Date()) + ".png"))));
 
         getTest().log(Status.FAIL, message,
                 MediaEntityBuilder.createScreenCaptureFromBase64String(base64Image).build());
@@ -45,8 +45,7 @@ public class ExtentTestManager {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH-mm-ss");
         ScreenshotOptions screenshotOptions = new ScreenshotOptions();
 
-        String base64Image = "data:image/png;base64,"
-                + PageManager.getPage().screenshot(screenshotOptions.setPath(Paths.get(SystemHelper.getCurrentDir() + PropertiesHelper.getValue("SCREENSHOT_PATH") + File.separator + dateFormat.format(new Date()) + ".png")));
+        String base64Image = Base64.getEncoder().encodeToString(PageManager.getPage().screenshot(screenshotOptions.setPath(Paths.get(SystemHelper.getCurrentDir() + PropertiesHelper.getValue("SCREENSHOT_PATH") + File.separator + "ExtentReport_" + dateFormat.format(new Date()) + ".png"))));
 
         getTest().log(status, message,
                 MediaEntityBuilder.createScreenCaptureFromBase64String(base64Image).build());

@@ -1,9 +1,9 @@
 package com.anhtester.pom.pages.admin;
 
 import com.anhtester.keywords.WebKeyword;
-import com.anhtester.pom.pages.CommonPage;
+import com.anhtester.pom.pages.BasePage;
 
-public class DashboardPage extends CommonPage {
+public class DashboardPage extends BasePage {
 
     private String totalCustomerLabel = "//div[normalize-space()='Total Customer']/following-sibling::div";
     private String totalOrderLabel = "//div[normalize-space()='Total Order']/following-sibling::div";

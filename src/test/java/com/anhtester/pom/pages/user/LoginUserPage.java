@@ -2,13 +2,12 @@ package com.anhtester.pom.pages.user;
 
 import com.anhtester.keywords.WebKeyword;
 import com.anhtester.managers.PageManager;
-import com.anhtester.pom.pages.CommonPage;
-import com.anhtester.pom.pages.admin.LoginPage;
+import com.anhtester.pom.pages.BasePage;
 import org.testng.Assert;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
-public class LoginUserPage extends CommonPage {
+public class LoginUserPage extends BasePage {
     private String URL_USER = "https://cms.anhtester.com/users/login";
     private String headerLoginPageUser = "//div[@class='card']//h1";
     private String buttonClosePopup = "//i[@class='la la-close fs-20']";
@@ -22,6 +21,7 @@ public class LoginUserPage extends CommonPage {
         WebKeyword.navigate(URL_USER);
         PageManager.getPage().waitForLoadState();
         WebKeyword.click(buttonClosePopup);
+        WebKeyword.click(buttonAcceptCookie);
         assertThat(PageManager.getPage().locator(headerLoginPageUser)).hasText("Login to your account.");
         WebKeyword.fill(inputEmail, email);
         WebKeyword.fill(inputPassword, password);
