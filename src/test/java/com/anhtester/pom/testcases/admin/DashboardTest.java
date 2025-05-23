@@ -10,10 +10,10 @@ public class DashboardTest extends BaseTest {
     public void testTotalSummaryInDashboard() {
         getLoginPage().loginAdminCMS("admin@example.com", "123456");
         PageManager.getPage().waitForLoadState();
-        getDashboardPage().verifyTotalCustomer("124");
-        getDashboardPage().verifyTotalOrder("734");
-        getDashboardPage().verifyTotalProductCategory("439");
-        getDashboardPage().verifyTotalProductBrand("84");
+        getDashboardPage().verifyTotalCustomer("596");
+        getDashboardPage().verifyTotalOrder("106");
+        getDashboardPage().verifyTotalProductCategory("289");
+        getDashboardPage().verifyTotalProductBrand("243");
     }
 
 }

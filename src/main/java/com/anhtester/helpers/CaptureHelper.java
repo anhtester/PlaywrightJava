@@ -1,5 +1,6 @@
 package com.anhtester.helpers;
 
+import com.anhtester.constants.AppConfig;
 import com.anhtester.managers.PageManager;
 
 import org.monte.media.Format;
@@ -52,7 +53,7 @@ public class CaptureHelper extends ScreenRecorder {
     // Start record video
     public static void startRecord(String methodName) {
         //Tạo thư mục để lưu file video vào
-        File file = new File(SystemHelper.getCurrentDir() + PropertiesHelper.getValue("VIDEO_RECORD_PATH"));
+        File file = new File(SystemHelper.getCurrentDir() + AppConfig.VIDEO_RECORD_PATH);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int width = screenSize.width;
         int height = screenSize.height;
@@ -89,12 +90,12 @@ public class CaptureHelper extends ScreenRecorder {
             // screenshots
             ScreenshotOptions screenshotOptions = new ScreenshotOptions();
 
-            File theDir = new File(SystemHelper.getCurrentDir() + PropertiesHelper.getValue("SCREENSHOT_PATH"));
+            File theDir = new File(SystemHelper.getCurrentDir() + AppConfig.SCREENSHOT_PATH);
             if (!theDir.exists()) {
                 theDir.mkdirs();
             }
 
-            PageManager.getPage().screenshot(screenshotOptions.setPath(Paths.get(SystemHelper.getCurrentDir() + PropertiesHelper.getValue("SCREENSHOT_PATH") + File.separator + screenshotName + "_" + dateFormat.format(new Date()) + ".png")));
+            PageManager.getPage().screenshot(screenshotOptions.setPath(Paths.get(SystemHelper.getCurrentDir() + AppConfig.SCREENSHOT_PATH + File.separator + screenshotName + "_" + dateFormat.format(new Date()) + ".png")));
             System.out.println("Screenshot taken: " + screenshotName);
             System.out.println("Screenshot taken current URL: " + PageManager.getPage().url());
         } catch (Exception e) {

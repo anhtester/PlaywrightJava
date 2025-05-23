@@ -1,5 +1,6 @@
 package com.anhtester.reports;
 
+import com.anhtester.constants.AppConfig;
 import com.anhtester.helpers.PropertiesHelper;
 import com.anhtester.helpers.SystemHelper;
 import com.anhtester.managers.PageManager;
@@ -35,7 +36,7 @@ public class ExtentTestManager {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH-mm-ss");
         ScreenshotOptions screenshotOptions = new ScreenshotOptions();
 
-        String base64Image = Base64.getEncoder().encodeToString(PageManager.getPage().screenshot(screenshotOptions.setPath(Paths.get(SystemHelper.getCurrentDir() + PropertiesHelper.getValue("SCREENSHOT_PATH") + File.separator + "ExtentReport_" + dateFormat.format(new Date()) + ".png"))));
+        String base64Image = Base64.getEncoder().encodeToString(PageManager.getPage().screenshot(screenshotOptions.setPath(Paths.get(SystemHelper.getCurrentDir() + AppConfig.SCREENSHOT_PATH + File.separator + "ExtentReport_" + dateFormat.format(new Date()) + ".png"))));
 
         getTest().log(Status.FAIL, message,
                 MediaEntityBuilder.createScreenCaptureFromBase64String(base64Image).build());
@@ -45,7 +46,7 @@ public class ExtentTestManager {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH-mm-ss");
         ScreenshotOptions screenshotOptions = new ScreenshotOptions();
 
-        String base64Image = Base64.getEncoder().encodeToString(PageManager.getPage().screenshot(screenshotOptions.setPath(Paths.get(SystemHelper.getCurrentDir() + PropertiesHelper.getValue("SCREENSHOT_PATH") + File.separator + "ExtentReport_" + dateFormat.format(new Date()) + ".png"))));
+        String base64Image = Base64.getEncoder().encodeToString(PageManager.getPage().screenshot(screenshotOptions.setPath(Paths.get(SystemHelper.getCurrentDir() + AppConfig.SCREENSHOT_PATH + File.separator + "ExtentReport_" + dateFormat.format(new Date()) + ".png"))));
 
         getTest().log(status, message,
                 MediaEntityBuilder.createScreenCaptureFromBase64String(base64Image).build());

@@ -13,7 +13,7 @@ public class DashboardPage extends BasePage {
 
     public void verifyTotalCustomer(String number) {
         WebKeyword.getSoftAssert().assertEquals(
-                WebKeyword.textContent(totalCustomerLabel),
+                WebKeyword.innerText(totalCustomerLabel),
                 number,
                 "The total Customer not match."
         );

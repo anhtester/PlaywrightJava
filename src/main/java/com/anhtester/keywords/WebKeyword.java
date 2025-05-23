@@ -7,6 +7,8 @@ import com.anhtester.reports.AllureManager;
 import com.anhtester.reports.ExtentTestManager;
 import com.anhtester.utils.LogUtils;
 import com.aventstack.extentreports.Status;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.LoadState;
 import io.qameta.allure.Step;
 import org.testng.asserts.SoftAssert;
 
@@ -124,6 +126,12 @@ public class WebKeyword {
         ExtentTestManager.logMessage(Status.INFO, "==> Text: " + text);
         AllureManager.saveTextLog("==> " + text);
         return text;
+    }
+
+    @Step("Wait for page loaded")
+    public static void waitForPageLoaded() {
+        PageManager.getPage().waitForLoadState(LoadState.LOAD);
+        LogUtils.info("Wait for page loaded");
     }
 
 }

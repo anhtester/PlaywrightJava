@@ -1,5 +1,6 @@
 package com.anhtester.listeners;
 
+import com.anhtester.constants.AppConfig;
 import com.anhtester.helpers.PropertiesHelper;
 import com.anhtester.helpers.SystemHelper;
 import com.anhtester.keywords.WebKeyword;
@@ -51,7 +52,7 @@ public class AllureListener implements TestLifecycleListener {
         if (result.getStatus() == Status.FAILED) {
             if (PageManager.getPage() != null) {
                 WebKeyword.sleep(1);
-                Allure.addAttachment(result.getName() + "_Failed_Screenshot", new ByteArrayInputStream(PageManager.getPage().screenshot(screenshotOptions.setPath(Paths.get(SystemHelper.getCurrentDir() + PropertiesHelper.getValue("SCREENSHOT_PATH") + File.separator + dateFormat.format(new Date()) + ".png")))));
+                Allure.addAttachment(result.getName() + "_Failed_Screenshot", new ByteArrayInputStream(PageManager.getPage().screenshot(screenshotOptions.setPath(Paths.get(SystemHelper.getCurrentDir() + AppConfig.SCREENSHOT_PATH + File.separator + dateFormat.format(new Date()) + ".png")))));
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.anhtester.reports;
 
+import com.anhtester.constants.AppConfig;
 import com.anhtester.helpers.FileHelper;
 import com.anhtester.helpers.PropertiesHelper;
 import com.anhtester.helpers.SystemHelper;
@@ -30,14 +31,14 @@ public class AllureManager {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH-mm-ss");
 
         ScreenshotOptions screenshotOptions = new ScreenshotOptions();
-        return PageManager.getPage().screenshot(screenshotOptions.setPath(Paths.get(SystemHelper.getCurrentDir() + PropertiesHelper.getValue("SCREENSHOT_PATH") + File.separator + dateFormat.format(new Date()) + ".png")));
+        return PageManager.getPage().screenshot(screenshotOptions.setPath(Paths.get(SystemHelper.getCurrentDir() + AppConfig.SCREENSHOT_PATH + File.separator + dateFormat.format(new Date()) + ".png")));
     }
 
     public static void addAttachmentVideoAVI() {
-        if (PropertiesHelper.getValue("VIDEO_RECORD").equals("true")) {
+        if (AppConfig.VIDEO_RECORD) {
             try {
                 //Get file Last Modified in folder
-                File video = FileHelper.getFileLastModified(PropertiesHelper.getValue("VIDEO_RECORD_PATH"));
+                File video = FileHelper.getFileLastModified(AppConfig.VIDEO_RECORD_PATH);
                 if (video != null) {
                     Allure.addAttachment("Failed test Video record AVI", "video/avi", Files.asByteSource(video).openStream(), ".avi");
                 } else {

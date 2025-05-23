@@ -6,22 +6,13 @@ import com.anhtester.helpers.PropertiesHelper;
 import com.anhtester.helpers.SystemHelper;
 import com.anhtester.keywords.WebKeyword;
 import com.anhtester.managers.PageManager;
-import com.anhtester.reports.AllureManager;
 import com.anhtester.reports.ExtentReportManager;
 import com.anhtester.reports.ExtentTestManager;
 import com.anhtester.utils.LogUtils;
 import com.aventstack.extentreports.Status;
-import com.microsoft.playwright.Page;
-import io.qameta.allure.Allure;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class TestListener implements ITestListener {
 
@@ -47,9 +38,11 @@ public class TestListener implements ITestListener {
     public void onTestStart(ITestResult result) {
         LogUtils.info("➡\uFE0F " + result.getName());
 
-        if (AppConfig.VIDEO_RECORD == true) {
+        if (AppConfig.VIDEO_RECORD) {
             CaptureHelper.startRecord(result.getName());
         }
+
+        PageManager.startTracing();
 
         ExtentTestManager.saveToReport(getTestName(result), getTestDescription(result));
     }
@@ -58,15 +51,15 @@ public class TestListener implements ITestListener {
     public void onTestSuccess(ITestResult result) {
         LogUtils.info("✅ " + result.getName() + " is PASSED.");
 
-        if (AppConfig.TRACE_VIEWER == true) {
-            PageManager.closeTracing("exports/tracing/trace_" + result.getName() + "_" + SystemHelper.getDateTimeNowAndMakeSlug() + ".zip");
+        if (AppConfig.TRACE_VIEWER) {
+            PageManager.closeTracing(AppConfig.TRACING_PATH + "trace_" + result.getName() + "_" + SystemHelper.getDateTimeNowAndMakeSlug() + ".zip");
         }
 
-        if (AppConfig.SCREENSHOT_PASS == true) {
+        if (AppConfig.SCREENSHOT_PASS) {
             CaptureHelper.takeScreenshot(result.getName());
         }
 
-        if (AppConfig.VIDEO_RECORD == true) {
+        if (AppConfig.VIDEO_RECORD) {
             WebKeyword.sleep(0.5);
             CaptureHelper.stopRecord();
         }
@@ -78,16 +71,16 @@ public class TestListener implements ITestListener {
     public void onTestFailure(ITestResult result) {
         LogUtils.error("❌ " + result.getName() + " is FAILED.");
 
-        if (AppConfig.TRACE_VIEWER == true) {
-            PageManager.closeTracing("exports/tracing/trace_" + result.getName() + "_FAILED_" + SystemHelper.getDateTimeNowAndMakeSlug() + ".zip");
+        if (AppConfig.TRACE_VIEWER) {
+            PageManager.closeTracing(AppConfig.TRACING_PATH + "trace_" + result.getName() + "_FAILED_" + SystemHelper.getDateTimeNowAndMakeSlug() + ".zip");
         }
 
-        if (AppConfig.SCREENSHOT_FAIL == true) {
+        if (AppConfig.SCREENSHOT_FAIL) {
             CaptureHelper.takeScreenshot(result.getName());
         }
 
-        if (AppConfig.VIDEO_RECORD == true) {
-            WebKeyword.sleep(0.5);
+        if (AppConfig.VIDEO_RECORD) {
+            WebKeyword.sleep(1);
             CaptureHelper.stopRecord();
         }
 
@@ -114,17 +107,12 @@ public class TestListener implements ITestListener {
         LogUtils.warn("*********" + result.getName() + " is SKIPPED *********");
 
         if (PropertiesHelper.getValue("VIDEO_RECORD").equals("true")) {
-            WebKeyword.sleep(0.5);
+            WebKeyword.sleep(1);
             CaptureHelper.stopRecord();
         }
 
         //Extent Report
         ExtentTestManager.logMessage(Status.SKIP, result.getThrowable().toString());
-    }
-
-    @Override
-    public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-        LogUtils.info("onTestFailedButWithinSuccessPercentage: " + result.getName());
     }
 
 }
